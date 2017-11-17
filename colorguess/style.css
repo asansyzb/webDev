@@ -77,3 +77,8 @@ button:hover {
 	background: steelblue;
 }
 
+.footer {
+	color: white; 
+	position:absolute right;
+	bottom: 0;
+}
