@@ -37,6 +37,9 @@ function setUpSquares() {
 				resetButton.textContent = "Play Again?"
 				h1.style.backgroundColor = clickedColor;
 				changeColors(clickedColor);
+				setTimeout(function() {
+					init();
+				}, 4000);
 			}
 			else {
 				this.style.backgroundColor = "#232323";
