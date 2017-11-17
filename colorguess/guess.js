@@ -7,7 +7,7 @@ var messageDisplay = document.querySelector("#message");
 var resetButton = document.querySelector("#reset");
 var h1 = document.querySelector("h1");
 var modeButtons = document.querySelectorAll(".mode");
-
+var t;
 init();
 
 function init() {
@@ -37,7 +37,7 @@ function setUpSquares() {
 				resetButton.textContent = "Play Again?"
 				h1.style.backgroundColor = clickedColor;
 				changeColors(clickedColor);
-				setTimeout(function() {
+				t = setTimeout(function() {
 					init();
 				}, 4000);
 			}
@@ -48,7 +48,7 @@ function setUpSquares() {
 		});
 	}
 }
-function reset() {
+function reset() {	
 	colors = generateRandomColors(gameMode);
 	pickedColor = pickColor();
 	colorDisplay.textContent = pickedColor;
@@ -70,6 +70,7 @@ function reset() {
 
 
 resetButton.addEventListener("click", function() {
+	clearTimeout(t);
 	reset();
 });
 function changeColors(color) {
