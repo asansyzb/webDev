@@ -1,14 +1,19 @@
 var gameMode = 6;
 var colors = [];
+var score = 0;
 var pickedColor;
+var clickDisabled = false;
 var squares = document.querySelectorAll(".square");
 var colorDisplay = document.querySelector("#colorDisplay");
 var messageDisplay = document.querySelector("#message");
 var resetButton = document.querySelector("#reset");
 var h1 = document.querySelector("h1");
 var modeButtons = document.querySelectorAll(".mode");
+var scoreDisplay = document.querySelector("#score");
 var t;
+var clearT = false;
 init();
+
 
 function init() {
 	setUpModeButtons();
@@ -19,6 +24,8 @@ function init() {
 function setUpModeButtons() {
 	for (var i = 0; i < modeButtons.length; i++) {
 		modeButtons[i].addEventListener("click", function() {
+			score = 0;
+			scoreDisplay.textContent = "Your score: " + score;
 			modeButtons[0].classList.remove("selected");
 			modeButtons[1].classList.remove("selected");
 			this.classList.add("selected");
@@ -32,23 +39,40 @@ function setUpSquares() {
 	// add click listeners to squares
 		squares[i].addEventListener("click", function() {
 			var clickedColor = this.style.backgroundColor;
-			if (clickedColor === pickedColor) {
-				messageDisplay.textContent = "Correct!";
-				resetButton.textContent = "Play Again?"
-				h1.style.backgroundColor = clickedColor;
-				changeColors(clickedColor);
-				t = setTimeout(function() {
-					init();
-				}, 4000);
+			if (!clickDisabled) {
+				if (clickedColor === pickedColor) {
+					clickDisabled = true;
+					messageDisplay.textContent = "Correct!";
+					resetButton.textContent = "Play Again?"
+					h1.style.backgroundColor = clickedColor;
+					changeColors(clickedColor);
+					score += 3;
+					scoreDisplay.textContent = "Your score: " + score;
+					t = setTimeout(function() {
+						clickDisabled = false;
+						reset();
+					}, 4000);
+					clearT = true;
 			}
 			else {
 				this.style.backgroundColor = "#232323";
 				messageDisplay.textContent = "Try again!";
+				score -= 2;
+				scoreDisplay.textContent = "Your score: " + score;
 			}
+			}
+			
 		});
 	}
 }
 function reset() {	
+	if (clearT) {
+		clearTimeout(t);
+		clearT = false;
+		console.log("i am here");
+		clickDisabled = false;
+	}
+
 	colors = generateRandomColors(gameMode);
 	pickedColor = pickColor();
 	colorDisplay.textContent = pickedColor;
@@ -70,7 +94,6 @@ function reset() {
 
 
 resetButton.addEventListener("click", function() {
-	clearTimeout(t);
 	reset();
 });
 function changeColors(color) {

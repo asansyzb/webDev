@@ -55,7 +55,15 @@ h1 {
 	text-transform: uppercase;
 	font-size: 100%;
 	font-weight: 700;
+}
 
+#score {
+	display: inline-block;
+	width: 15%;
+	color: steelblue;
+	text-transform: uppercase;
+	font-size: 100%;
+	font-weight: 700;	
 }
 button {
 	border: none;
