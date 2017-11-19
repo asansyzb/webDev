@@ -33,12 +33,18 @@
 		    }
 		}
 	}
+	var pointTextLocation = new paper.Point(view.size.width / 2, view.size.height / 2);
+	var myText = new paper.PointText(pointTextLocation);
+	myText.fillColor = 'white';
+	myText.content = 'Press any Key and Enjoy :)';
+	myText.fontSize = "50px";
+	myText.justification = 'center';
+
 
 
 	</script>
 </head>
 <body>
-
 	<canvas id="myCanvas" resize></canvas>
 	<script type="text/javascript" src="assets/js/patapap.js"></script>
 	<script type="text/javascript" src="assets/js/data.js"></script>
