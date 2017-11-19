@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Circle</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script type="text/javascript" src="assets/js/lib/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/paper-full.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.5/howler.js"></script>
+	<script type="text/paperscript" canvas="myCanvas">
+		
+
+	var circles = [];
+	function onKeyDown(event) {
+		if (data[event.key]) {
+			var maxPoint = new Point(view.size.width, view.size.height); 
+			var randomPoint = Point.random();
+			var point = maxPoint * randomPoint;
+			var newCircle = new Path.Circle(point, 500);
+			newCircle.fillColor = data[event.key].color;
+			data[event.key].sound.play();
+			circles.push(newCircle);
+		}
+	}
+
+	function onFrame(event) {
+		for (var i = 0; i < circles.length; i++) {
+			circles[i].fillColor.hue += 1;
+			circles[i].scale(0.9);
+			if(circles[i].area < 1){
+		      circles[i].remove();
+		      circles.splice(i, 1);
+		      i--;
+		    }
+		}
+	}
+
+
+	</script>
+</head>
+<body>
+
+	<canvas id="myCanvas" resize></canvas>
+	<script type="text/javascript" src="assets/js/patapap.js"></script>
+	<script type="text/javascript" src="assets/js/data.js"></script>
+
+</body>
+</html>
