@@ -3,5 +3,6 @@ Web development
 Simple web application
 
 http://colorgamess.netlify.com/
+https://friendly-wozniak.netlify.com/
 
-You can check it on the site above.
+You can check websites above.
